@@ -5,8 +5,7 @@
 
 # Prerequisites
 
--Ensure you have Node.js and npm (Node Package Manager) installed on your system. You can download Node.js and npm from here.
-
+-Ensure you have Node.js and npm (Node Package Manager) installed on your system. 
 # Installation
 To get started with the project, clone the repository and install the necessary dependencies:
 
