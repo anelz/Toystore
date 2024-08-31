@@ -12,7 +12,7 @@ To get started with the project, clone the repository and install the necessary 
 
 bash
 Copy code
-git clone 
+git clone https://github.com/anelz/Toystore.git
 cd Toystore 
 npm install
 Starting the Development Server
