@@ -1,13 +1,13 @@
-#TOYSTORE REACT APPLICATION
+# TOYSTORE REACT APPLICATION
 -This is a simple React application for a ToyStore, built with React, Material-UI, TailwindCSS, and other modern libraries.
 
-#Project Setup
+# Project Setup
 
-#Prerequisites
+# Prerequisites
 
 -Ensure you have Node.js and npm (Node Package Manager) installed on your system. You can download Node.js and npm from here.
 
-#Installation
+# Installation
 To get started with the project, clone the repository and install the necessary dependencies:
 
 bash
@@ -24,14 +24,14 @@ npm start
 This will start the application, and you can view it in your browser at http://localhost:3000.
 
 
-#Project Structure
+# Project Structure
 src/: This directory contains the source code of the application.
 public/: This directory contains the public assets like index.html.
 node_modules/: This directory contains all the npm packages used in the project.
 Dependencies
 This project uses the following main dependencies:
 
-React: A JavaScript library for building user interfaces.
+# React: A JavaScript library for building user interfaces.
 Material-UI (MUI): A popular React UI framework for building responsive applications.
 TailwindCSS: A utility-first CSS framework for quickly styling your components.
 Axios: A promise-based HTTP client for making API requests.
