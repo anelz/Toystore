@@ -1,33 +1,69 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import PrivateRoute from "../components/PrivateRoute";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TextField,
+} from "@mui/material";
+import { Button } from "@mui/material";
+import { useParams } from "react-router-dom";
 
 const Cart = () => {
-  const [order, setOrder] = useState("");
-
-  const fetchingOrder = async () => {
-    const { data } = await axios.get("http://localhost:3001/orders");
-    setOrder(data);
-    console.log(data);
-  };
+  const [order, setOrder] = useState([]);
 
   useEffect(() => {
+    const fetchingOrder = async () => {
+      const userId = localStorage.getItem("userId");
+      const { data } = await axios.get(
+        "http://localhost:3001/orders/ " + userId
+      );
+
+      console.log(data);
+      setOrder(data);
+    };
+
     fetchingOrder();
   }, []);
 
   return (
-    <PrivateRoute>
-      <div className="flex-1 flex-col gap-5 p-4">
-        <div className="h-full w-1/2 flex flex-col gap-5 p-4">
-          <span className=" w-full gap-4  text-2xl">
-            Order Number : {order._id}
-          </span>
-          <span className="text-2xl">ToyId : {order.toyId}</span>
-          <span className="text-2xl">User : {order.user}</span>
-          <span className="text-2xl">Quantity : {order.quantity}</span>
-        </div>
-      </div>
-    </PrivateRoute>
+    <div className="flex-grow ">
+      <PrivateRoute>
+        <TableContainer>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Order Number</TableCell>
+                <TableCell>User</TableCell>
+                <TableCell>ToyId</TableCell>
+                <TableCell>Quantity</TableCell>
+                <TableCell>Actions</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {order.map((ord) => (
+                <TableRow key={ord._id}>
+                  <TableCell>{ord._id}</TableCell>
+                  <TableCell>{ord.user}</TableCell>
+                  <TableCell>{ord.toyId}</TableCell>
+                  <TableCell>{ord.quantity}</TableCell>
+                  <TableCell>
+                    <Button variant="contained" color="error">
+                      Delete
+                    </Button>
+                  </TableCell>
+                  <TableCell></TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </PrivateRoute>
+    </div>
   );
 };
 

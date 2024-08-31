@@ -3,9 +3,9 @@ import { ROUTES } from "../constants";
 
 const PrivateRoute = ({ children }) => {
   const userId = localStorage.getItem("userId");
+  const role = localStorage.getItem("role");
 
-  if (!userId) return <Navigate to={ROUTES.HOME} />;
-
+  if (!userId && !role) return <Navigate to={ROUTES.HOME} />;
 
   return children;
 };

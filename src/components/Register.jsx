@@ -1,6 +1,6 @@
 import { TextField, Button } from "@mui/material";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
@@ -12,13 +12,17 @@ const Register = () => {
 
   const registerHandleAdd = async (e) => {
     try {
-      await axios.post("http://localhost:3001/users/register", {
-        name,
-        surname,
-        username,
-        password,
-        role,
-      });
+      await axios
+        .post("http://localhost:3001/users/register", {
+          name,
+          surname,
+          username,
+          password,
+          role,
+        })
+        .then((response) => {
+          alert("Your registration was successful, please login in");
+        });
 
       handleClickClose();
     } catch (e) {
@@ -31,12 +35,12 @@ const Register = () => {
     setSurname("");
     setUsername("");
     setPassword("");
-    setRole("");
+    setRole("User");
   };
 
   return (
     <div className="h-full w-full flex flex-col gap-5 p-4">
-      <h1 className=" text-3xl flex justify-center">Register to Toystore </h1>
+      <h1 className=" text-2xl flex justify-center">Register to Toystore </h1>
       <TextField
         value={name}
         onChange={(e) => setName(e.target.value)}
@@ -58,12 +62,8 @@ const Register = () => {
         label="password"
         type="password"
       />
-      <TextField
-        value={role}
-        onChange={(e) => setRole(e.target.value)}
-        label="type"
-      />
-      <div className=" flex justify-center ">
+
+      <div className=" flex justify-center  ">
         <Button onClick={registerHandleAdd} variant="contained">
           Register
         </Button>

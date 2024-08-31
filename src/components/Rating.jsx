@@ -2,9 +2,10 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
+import { useState } from "react";
 
-export default function BasicRating() {
-  const [value, setValue] = React.useState(2);
+const BasicRating = ({ rating, setRatingclicked }) => {
+  const [value, setValue] = useState();
 
   return (
     <Box
@@ -22,4 +23,6 @@ export default function BasicRating() {
       />
     </Box>
   );
-}
+};
+
+export default BasicRating;

@@ -16,7 +16,6 @@ const Login = () => {
         username,
         password,
       });
-      console.log(data);
 
       localStorage.setItem("userId", data);
       handelClickDelete();
@@ -32,7 +31,7 @@ const Login = () => {
 
   return (
     <div className="h-full w-full flex flex-col gap-8 p-4">
-      <h1 className=" text-3xl flex justify-center">Login to Toystore </h1>
+      <h1 className=" text-2xl flex justify-center">Login to Toystore </h1>
       <TextField
         value={username}
         onChange={(e) => setUsername(e.target.value)}

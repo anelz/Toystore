@@ -1,4 +1,4 @@
-import { TextField, TextareaAutosize } from "@mui/material";
+import { CircularProgress, TextField, TextareaAutosize } from "@mui/material";
 import Alltoys from "../components/Alltoys";
 import React, { useState, useEffect } from "react";
 import Footer from "../components/Footer";
@@ -11,12 +11,19 @@ import PrivateRoute from "../components/PrivateRoute";
 const Toys = () => {
   const [search, setSearch] = useState("");
   const [toys, setToys] = useState([]);
+  const [loading, setloading] = useState(false);
 
   const fetchtoys = async () => {
-    const { data } = await getToys();
-    setToys(data);
+    try {
+      setloading(true);
+      const { data } = await getToys();
+      setToys(data);
+    } catch (e) {
+      alert(e?.response?.data);
+    } finally {
+      setloading(false);
+    }
   };
-
   useEffect(() => {
     fetchtoys();
   }, []);
@@ -24,6 +31,11 @@ const Toys = () => {
   return (
     <>
       <div className="flex flex-1 flex-col gap-4">
+        {loading && (
+          <div className="loading">
+            <CircularProgress></CircularProgress>
+          </div>
+        )}
         <div className=" w-full flex justify-center pt-8">
           <TextField
             value={search}

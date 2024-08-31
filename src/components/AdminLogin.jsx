@@ -21,7 +21,7 @@ const AdminLogin = () => {
       handelClickDeletefields();
       navigate(ROUTES.ADMIN);
     } catch (e) {
-      alert(e?.reaponse?.data || "Username or Password incorrect");
+      alert(e?.response?.data || "Username or Password incorrect");
     }
   };
   const handelClickDeletefields = () => {
@@ -31,7 +31,7 @@ const AdminLogin = () => {
 
   return (
     <div className="h-full w-full flex flex-col gap-8 p-4">
-      <h1 className=" text-3xl flex justify-center">Login as Admin </h1>
+      <h1 className=" text-2xl flex justify-center">Login as Admin </h1>
       <TextField
         value={username}
         onChange={(e) => setUsername(e.target.value)}

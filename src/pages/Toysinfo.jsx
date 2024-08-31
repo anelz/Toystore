@@ -1,21 +1,21 @@
 import AllToys from "./Toys";
 import Toy from "../components/Toy";
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Button, TextField } from "@mui/material";
 import { getToysDetails } from "../api/Toys";
 import PrivateRoute from "../components/PrivateRoute";
-import Ratingstars from "../components/Rating";
-import BasicRating from "../components/Rating";
+import Rating from "@mui/material/Rating";
 
 const Toysinfo = () => {
   const { toyId } = useParams();
   const [toysdetails, setToysDetails] = useState([]);
+  const [price, setPrice] = useState("");
   const [user, Setuser] = useState("");
   const [toy, setToy] = useState("");
   const [quantity, setQuantity] = useState(1);
-  const [rating, setRating] = useState("");
+  const [rating, setRating] = React.useState(2);
   const [comments, setComments] = useState("");
 
   useEffect(() => {
@@ -28,9 +28,22 @@ const Toysinfo = () => {
   }, [toyId]);
 
   const handleClickBuy = async () => {
-    const user = localStorage.getItem("userId");
-    await axios.post("http://localhost:3001/orders", { toyId, user, quantity });
-    quantitykDeletefield();
+    try {
+      const userId = localStorage.getItem("userId");
+      await axios
+        .post("http://localhost:3001/orders", {
+          toyId,
+          userId,
+          price: toysdetails.price,
+          quantity,
+        })
+        .then((response) => {
+          alert("You order was successful");
+        });
+      quantitykDeletefield();
+    } catch (e) {
+      alert(e?.reaponse?.data || "Quantity must be over 0");
+    }
   };
 
   const quantitykDeletefield = () => {
@@ -43,14 +56,22 @@ const Toysinfo = () => {
   };
 
   const handleClickRate = async () => {
-    const user = localStorage.getItem("userId");
-    await axios.post("http://localhost:3001/reviews", {
-      toyId,
-      user,
-      comments,
-      rating,
-    });
-    rateDeletefields();
+    try {
+      const user = localStorage.getItem("userId");
+      await axios
+        .post("http://localhost:3001/reviews", {
+          toyId,
+          user,
+          comments,
+          rating,
+        })
+        .then((response) => {
+          alert("Thank you for your comment and star rating ");
+        });
+      rateDeletefields();
+    } catch (e) {
+      alert(e?.reaponse?.data || " Comment field must be filled in");
+    }
   };
 
   return (
@@ -61,6 +82,7 @@ const Toysinfo = () => {
           <div className="flex justify-center items-center h-2/3  w-full ">
             <img className="h-full w-1/2 " src={toysdetails.img} />
           </div>
+
           <div className="flex h-full w-full flex-col  gap-5 items-center  ">
             <TextField
               value={quantity}
@@ -102,9 +124,14 @@ const Toysinfo = () => {
             <span className="text-2xl">{toysdetails.price + "KM"}</span>
           </div>
           <div className="h-1/4 w-full flex flex-col gap-5 ">
-            <BasicRating
+            <Rating
+              name="jednostavno-kontrolirano"
               value={rating}
-              onChange={(e) => setRating(e.target.value)}
+              onChange={(event, newValue) => {
+                setRating(newValue);
+              }}
+              precision={0.5}
+              size="large"
             />
             <textarea
               placeholder="Please rate our product"
