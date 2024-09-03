@@ -38,12 +38,7 @@ React Router DOM: For handling routing in the application.
 Development Tools
 ESLint: Configured with react-app and react-app/jest for linting and maintaining code quality.
 Jest & Testing Library: For testing components and functionality in the application.
-Browsers Support
-The application supports modern browsers, both in production and development:
 
-Production: Browsers with >0.2% market share, not dead, and not Opera Mini.
-Development: Latest versions of Chrome, Firefox, and Safari.
-License
 This project is licensed under the MIT License.
 
 -----------------------------------------------------------------
